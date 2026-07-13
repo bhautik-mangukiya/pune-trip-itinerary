@@ -1,0 +1,590 @@
+<title>Surat → Lonavala → Pune — Full Itinerary</title>
+<style>
+  :root{
+    --bg:#e8eee8; --ink:#16211c; --card:#ffffff; --muted:#5b6862; --line:#d6dfd8;
+    --pine:#1c5748; --pine2:#2c7d67; --pine-soft:#e3efe9;
+    --warn:#8f5d14; --warn-bg:#f7eeda; --warn-line:#e8d4a6;
+    --stop:#98301f; --stop-bg:#f6e6e2; --stop-line:#e7c4bd;
+    --rail:#17281f;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,"SF Mono","Cascadia Mono",Menlo,Consolas,monospace;
+    --shadow:0 1px 2px rgba(18,38,28,.05),0 10px 26px rgba(18,38,28,.07);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.5;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:940px;margin:0 auto;padding:16px 15px 80px}
+  a{color:var(--pine)}
+  .tnum{font-variant-numeric:tabular-nums}
+
+  /* hero */
+  .hero{position:relative;overflow:hidden;border-radius:16px;color:#eef5f1;
+    background:radial-gradient(120% 140% at 88% -10%,#2c7d67 0%,#1c5748 42%,#123a2f 100%);
+    padding:24px 22px;box-shadow:var(--shadow)}
+  .hero h1{margin:0;font-size:25px;letter-spacing:.2px;line-height:1.15;text-wrap:balance}
+  .hero .sub{margin-top:7px;font-size:13.5px;opacity:.88}
+  .hero .chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:15px}
+  .chip{font-size:12px;padding:5px 10px;border-radius:999px;background:rgba(255,255,255,.13);
+    border:1px solid rgba(255,255,255,.26)}
+  .hero .glyph{position:absolute;right:16px;bottom:-14px;font-size:96px;opacity:.13;line-height:1}
+
+  /* critical rules */
+  .rules{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:14px 0 6px}
+  .rule{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:11px 13px;box-shadow:var(--shadow)}
+  .rule .lbl{font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;font-weight:700;color:var(--muted);margin-bottom:3px}
+  .rule.warn{background:var(--warn-bg);border-color:var(--warn-line)}
+  .rule.warn .lbl{color:var(--warn)}
+  .rule.stop{background:var(--stop-bg);border-color:var(--stop-line)}
+  .rule.stop .lbl{color:var(--stop)}
+  .rule b{color:var(--ink)}
+  .rule{font-size:12.5px}
+
+  .deadline{display:flex;gap:13px;align-items:flex-start;margin:14px 0 2px;
+    background:linear-gradient(90deg,#f7eeda,#f6e6e2);border:1.5px solid var(--warn-line);
+    border-radius:13px;padding:13px 16px;box-shadow:var(--shadow)}
+  .deadline .dl-tag{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.04em;
+    text-transform:uppercase;color:#fff;background:var(--warn);padding:7px 11px;border-radius:9px;
+    flex:0 0 auto;text-align:center;line-height:1.25}
+  .deadline .dl-body{font-size:13px;color:#3f3313}
+  .deadline .dl-body b{color:#2c220c}
+
+  /* sticky day nav */
+  .nav{position:sticky;top:0;z-index:5;display:flex;gap:6px;flex-wrap:wrap;
+    padding:9px 4px;margin:8px -4px 4px;background:rgba(232,238,232,.86);backdrop-filter:blur(8px)}
+  .nav a{font-size:12px;font-weight:600;text-decoration:none;color:var(--pine);
+    border:1px solid var(--line);background:var(--card);padding:6px 11px;border-radius:9px}
+  .nav a:hover{border-color:var(--pine)}
+
+  /* day card */
+  .day{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    box-shadow:var(--shadow);margin-top:14px;overflow:hidden;scroll-margin-top:58px}
+  .dhead{display:flex;align-items:baseline;gap:11px;padding:15px 18px 12px;border-bottom:1px solid var(--line)}
+  .dhead .no{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.06em;
+    color:#fff;background:var(--pine);padding:4px 8px;border-radius:7px;flex:0 0 auto}
+  .dhead .ttl{font-size:17px;font-weight:700;line-height:1.2}
+  .dhead .date{font-size:12.5px;color:var(--muted);margin-top:1px}
+  .dhead .wx{margin-left:auto;font-size:22px;flex:0 0 auto;align-self:center}
+  .body{padding:6px 18px 16px}
+
+  /* timeline rows */
+  .row{display:flex;gap:13px;padding:9px 0;border-top:1px dashed var(--line)}
+  .row:first-child{border-top:none}
+  .t{flex:0 0 50px;font-family:var(--mono);font-size:13px;font-weight:600;padding-top:1px;
+    font-variant-numeric:tabular-nums;color:var(--rail)}
+  .c{flex:1;min-width:0}
+  .act{font-weight:600;font-size:14.5px}
+  .act .star{color:var(--pine2)}
+  .desc{color:var(--muted);font-size:12.5px;margin-top:2px}
+  .fee{display:inline-block;font-size:11.5px;color:var(--pine);font-weight:600;
+    background:var(--pine-soft);border-radius:6px;padding:1px 7px;margin-top:4px}
+  .map{font-size:11.5px;text-decoration:none;color:var(--pine);font-weight:600;white-space:nowrap}
+  .map:hover{text-decoration:underline}
+
+  /* transit segment */
+  .seg{display:flex;align-items:center;flex-wrap:wrap;gap:7px;margin:2px 0 2px;
+    font-size:12px;color:#41504a;background:#f1f5f2;border:1px solid var(--line);
+    border-radius:9px;padding:5px 10px}
+  .seg .mode{font-size:14px}
+  .seg b{color:var(--ink);font-weight:600}
+  .seg .num{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:11.5px}
+  .seg .dot{color:#a7b3ac}
+  .seg.train{background:var(--rail);border-color:var(--rail);color:#dfe9e3}
+  .seg.train b{color:#fff}
+  .seg.train .dot{color:#5c7268}
+
+  /* notes */
+  .note{border-radius:9px;padding:8px 12px;font-size:12px;margin:8px 0 4px;border:1px solid}
+  .note .nl{font-weight:700;text-transform:uppercase;letter-spacing:.07em;font-size:10px;margin-right:5px}
+  .note.warn{background:var(--warn-bg);border-color:var(--warn-line);color:#4a3a17}
+  .note.warn .nl{color:var(--warn)}
+  .note.stop{background:var(--stop-bg);border-color:var(--stop-line);color:#4a231d}
+  .note.stop .nl{color:var(--stop)}
+  .note.go{background:var(--pine-soft);border-color:#c4ddd2;color:#173f34}
+  .note.go .nl{color:var(--pine)}
+  .opt-h{font-size:12px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--pine);margin:9px 0 2px}
+  .alt{margin-top:12px;border:1px dashed var(--warn-line);border-radius:12px;padding:3px 15px 11px;background:#faf5ea}
+  .alt .opt-h{color:var(--warn)}
+  .altnote{font-size:12px;color:#4a3a17;margin:9px 0 2px;line-height:1.55}
+
+  /* team / packing / ops sections */
+  .roles{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:9px}
+  .role-c{border:1px solid var(--line);border-radius:10px;padding:9px 11px;background:#f6faf7}
+  .role-c .rr{font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--pine);font-weight:700;margin-bottom:3px}
+  .role-c .pp{font-size:13.5px;font-weight:600;color:var(--ink)}
+  .role-c.lead{background:var(--pine);border-color:var(--pine)}
+  .role-c.lead .rr{color:#bfe0d4}
+  .role-c.lead .pp{color:#fff}
+  .subttl{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--pine);margin:14px 0 5px}
+  .grp{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px}
+  .grp .g{border:1px solid var(--line);border-radius:9px;padding:7px 10px;background:#f6faf7;font-size:13px;font-weight:600}
+  .grp .g b{display:block;font-family:var(--mono);font-size:10.5px;color:var(--pine);text-transform:uppercase;letter-spacing:.04em;margin-bottom:2px;font-weight:700}
+  .cols{columns:2;column-gap:24px}
+  @media(max-width:560px){.cols{columns:1}}
+  .chk{break-inside:avoid;font-size:13px;padding:4px 0 4px 21px;position:relative;line-height:1.45;color:#33413a}
+  .chk::before{content:"▢";position:absolute;left:1px;top:2px;color:var(--pine2);font-size:12px}
+  .chk b{color:var(--ink)}
+
+  .legend{display:flex;flex-wrap:wrap;gap:12px;margin:16px 4px 0;font-size:12px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:5px}
+  footer{text-align:center;color:#8a978f;font-size:11.5px;margin-top:22px;line-height:1.7}
+
+  @media(max-width:560px){
+    .rules{grid-template-columns:1fr}
+    .t{flex-basis:44px;font-size:12px}
+    .hero h1{font-size:21px}
+    .wrap{padding:12px 11px 60px}
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="hero">
+    <h1>🚂 Surat → Lonavala → Pune → Surat</h1>
+    <div class="sub">Office group trip · Fri 24 – Tue 28 July 2026 · Peak monsoon</div>
+    <div class="chips">
+      <span class="chip">👥 19 people</span>
+      <span class="chip">🛏️ Base · Zen Colive, Koregaon Park (2 nights)</span>
+      <span class="chip">🎫 Overnight trains both ways</span>
+      <span class="chip">🚐 Pre-booked cab · GST invoice</span>
+    </div>
+    <div class="glyph">⛰️</div>
+  </header>
+
+  <div class="deadline">
+    <div class="dl-tag">⏳ Decide by<br>Mon 20 Jul</div>
+    <div class="dl-body"><b>Confirm GO / NO-GO on Monday 20 July</b> — the last day for <b>free / flat-fee cancellation</b> on the trains &amp; hotel. Until then everything stays refundable, so hold. On 20 Jul make the final call from the live <b>4-day forecast</b> + rail/road status — is the <b>Karjat–Lonavala ghat fully restored</b>? any <b>red alert</b> on 24–28 Jul? Has <b>Sinhagad reopened</b>? — then lock it. After 20 Jul, cancelling costs money.</div>
+  </div>
+
+  <section class="rules">
+    <div class="rule warn">
+      <div class="lbl">🚆 If the Avadh runs late</div>
+      Averages <b>+72 min</b>. Don't chase one train — <b>wait at Dadar &amp; take the next Lonavala train</b>: Indrayani <b>05:53</b> → Intercity <b>~06:53</b> → Deccan <b>~07:13</b> (all reach Lonavala by ~09:40). <i>2nd &amp; 3rd run only if the ghat's fully restored — check 20 Jul; else Indrayani-or-road.</i>
+    </div>
+    <div class="rule stop">
+      <div class="lbl">❌ If the Avadh is cancelled</div>
+      Check Fri afternoon (NTES). Fare <b>auto-refunds</b> — hire a <b>20-seat tempo Surat → Lonavala</b> (or Saurashtra Mail 00:10). Don't wait at the station.
+    </div>
+    <div class="rule">
+      <div class="lbl">🚐 Cab booking</div>
+      Book <b>6-hr local</b> (ends Lonavala stn) — <b>bags stay onboard</b>. Give <b>company GSTIN</b> for the tax invoice. Pre-book ≥1 week ahead.
+    </div>
+    <div class="rule">
+      <div class="lbl">🌧️ Monsoon orders</div>
+      Lonavala ban is <b>activity-only, 6 AM–6 PM</b> — no water entry / no vehicles to the edge, but you <b>can still visit &amp; photograph</b> Bhushi &amp; the viewpoints. <b>Sinhagad closed now</b> (landslide); Rajgad/Tamhini/Okayama avoid. Reconfirm 20 Jul.
+    </div>
+  </section>
+
+  <nav class="nav">
+    <a href="#d1">Day 1 · Fri</a>
+    <a href="#d2">Day 2 · Sat</a>
+    <a href="#d3">Day 3 · Sun</a>
+    <a href="#d4">Day 4 · Mon</a>
+    <a href="#d5">Day 5 · Tue</a>
+    <a href="#resp">Team</a>
+    <a href="#pack">Pack</a>
+    <a href="#ops">Ops</a>
+  </nav>
+
+  <!-- DAY 1 -->
+  <section class="day" id="d1">
+    <div class="dhead">
+      <span class="no">DAY 1</span>
+      <div><div class="ttl">Surat → Overnight Train</div><div class="date">Friday, 24 July 2026</div></div>
+      <span class="wx">🌙</span>
+    </div>
+    <div class="body">
+      <div class="row"><div class="t">22:45</div><div class="c">
+        <div class="act">Reach Surat Junction (ST)</div>
+        <div class="desc">Headcount of 19, settle on the platform. Check the Avadh's live status.</div>
+      </div></div>
+      <div class="row"><div class="t">23:31</div><div class="c">
+        <div class="act">Depart Surat — Avadh Express (19038) · Sleeper</div>
+        <div class="seg train"><span class="mode">🚆</span> <b>Surat → Bandra Terminus</b> <span class="dot">·</span> <span class="num">257 km</span> <span class="dot">·</span> <span class="num">4 h 34 m</span></div>
+        <div class="desc">Overnight; sleep ~4.5 hrs.</div>
+        <div class="note warn"><span class="nl">Watch</span>This is the trip's one fragile leg — a 2,250 km train from Bihar. See the delay/cancel rules at the top.</div>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- DAY 2 -->
+  <section class="day" id="d2">
+    <div class="dhead">
+      <span class="no">DAY 2</span>
+      <div><div class="ttl">Mumbai transfer → Lonavala circuit → Pune</div><div class="date">Saturday, 25 July 2026</div></div>
+      <span class="wx">🚉💧</span>
+    </div>
+    <div class="body">
+      <div class="row"><div class="t">04:05</div><div class="c">
+        <div class="act">Arrive Mumbai Bandra Terminus (BDTS)</div>
+        <div class="seg"><span class="mode">🚶</span> <b>BDTS → Bandra local station</b> <span class="dot">·</span> <span class="num">~1.5 km</span> <span class="dot">·</span> walk 15–20 min / short auto</div>
+        <div class="seg"><span class="mode">🚆</span> <b>Bandra → Dadar West (local)</b> <span class="dot">·</span> <span class="num">~6 km</span> <span class="dot">·</span> <span class="num">8 min</span> <span class="dot">·</span> first ~04:05, then every ~10–15 min</div>
+        <div class="desc"><b>No taxi needed</b> — locals are near-empty at 4–5 AM, so 19 people + luggage is easy.</div>
+        <div class="note go"><span class="nl">Local · not 24×7 · tickets · how-to</span><b>Not round-the-clock:</b> locals pause ~01:40–04:00, then restart ~04:00 — so your 04:05 arrival lines up (only an <i>early</i> Avadh means a few-min wait). &nbsp;<b>Tickets:</b> 2nd class ~₹10 pp — buy 19 at the Bandra booking counter (no queue at 4 AM) or on the <b>UTS app</b>; carry a valid ticket before boarding. &nbsp;<b>Catch it:</b> at Bandra take <b>any Churchgate-direction (southbound)</b> local — slow or fast, all stop at Dadar; read the platform indicator board. &nbsp;<b>Stations:</b> Bandra → Mahim Jn → Matunga Road → <b>Dadar</b> (4th stop, ~8 min). &nbsp;Get off at <b>Dadar West</b>, cross the <b>Tilak foot-over-bridge to Dadar Central (East)</b> for the Indrayani.</div>
+      </div></div>
+      <div class="row"><div class="t">04:45</div><div class="c">
+        <div class="act">Reach Dadar — move to the Central-line platforms (Dadar Central / East)</div>
+        <div class="desc">If you road it instead of the local, tell drivers <b>Dadar Central (East)</b>, not Dadar West. Freshen up, chai. Check the platform on the NTES app / station board.</div>
+      </div></div>
+      <div class="row"><div class="t">05:53</div><div class="c">
+        <div class="act">Board Indrayani Express (22105) at Dadar Central</div>
+        <div class="seg train"><span class="mode">🚆</span> <b>Dadar → Lonavala</b> <span class="dot">·</span> <span class="num">116 km</span> <span class="dot">·</span> <span class="num">2 h 05 m</span></div>
+        <div class="note warn"><span class="nl">2-min halt — board fast</span>Reserved seats in <b>1–2 adjacent coaches</b>. Get every person + bag on the <b>nearest door first</b>, then walk through to your seats (LHB coaches connect inside). Split into door-groups; one person counts heads &amp; boards last. Be on the platform by <b>05:35</b>.</div>
+        <div class="note warn"><span class="nl">If you miss it</span>Don't chase — <b>wait at Dadar for the next Lonavala train</b>: Intercity <b>~06:53</b> → Deccan <b>~07:13</b> (Lonavala by ~09:40); everything below just shifts later. <i>Both run only if the ghat's fully restored (check 20 Jul) — if not, take the pre-booked <b>road tempo</b> Bandra → Lonavala.</i></div>
+      </div></div>
+      <div class="row"><div class="t">07:58</div><div class="c">
+        <div class="act">Arrive Lonavala (LNL) — meet the pre-booked cab</div>
+        <div class="desc">Bags go into the cab and stay onboard all day. Quick pure-veg breakfast at the station (poha / misal / vada pav).</div>
+      </div></div>
+
+      <div class="note warn" style="margin:2px 0 10px"><span class="nl">Monsoon order · 6 AM–6 PM</span>Bhushi, Tiger &amp; Lion's are under an <b>activity ban, not a no-entry ban</b> — you <b>can visit &amp; photograph</b> them, but <b>no entering the water, no sitting under falls, and the cab can't drive to the water's edge</b> (it parks back — you walk in). On a red-alert day police may shut a spot outright. Confirm the live position on 20 Jul &amp; that morning; if a viewpoint's fogged or closed, roll the time into the market stop.</div>
+
+      <div class="row"><div class="t">08:30</div><div class="c">
+        <div class="seg"><span class="mode">🚐</span> <b>Station → Lonavala Lake</b> <span class="dot">·</span> <span class="num">~2 km</span> <span class="dot">·</span> <span class="num">8 min</span></div>
+        <div class="act">Lonavala Lake <a class="map" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=18.74179,73.39960">📍 map</a></div>
+        <div class="desc">Full & lush — quick photo stop (10 min).</div>
+      </div></div>
+      <div class="row"><div class="t">08:55</div><div class="c">
+        <div class="seg"><span class="mode">🚐</span> <b>→ Bhushi Dam</b> <span class="dot">·</span> <span class="num">~4 km</span> <span class="dot">·</span> <span class="num">12 min</span></div>
+        <div class="act">Bhushi Dam <span class="star">★</span> <a class="map" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=18.72120,73.39848">📍 map</a></div>
+        <div class="desc">The highlight (~60 min). Go early — packed by 10–11. <b>Stay on the lower steps, out of fast water; no alcohol.</b></div>
+      </div></div>
+      <div class="row"><div class="t">10:05</div><div class="c">
+        <div class="seg"><span class="mode">🚐</span> <b>→ Shooting Point</b> <span class="dot">·</span> <span class="num">~3 km</span> <span class="dot">·</span> <span class="num">10 min</span></div>
+        <div class="act">Shooting Point</div>
+        <div class="desc">Quick valley viewpoint (10 min).</div>
+      </div></div>
+      <div class="row"><div class="t">10:25</div><div class="c">
+        <div class="seg"><span class="mode">🚐</span> <b>→ Tiger Point</b> <span class="dot">·</span> <span class="num">~3 km</span> <span class="dot">·</span> <span class="num">10 min</span></div>
+        <div class="act">Tiger Point (Tiger's Leap) <a class="map" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=18.6960869,73.385235">📍 map</a></div>
+        <div class="desc">15 min — only if clear; skip if fogged / barricaded.</div>
+      </div></div>
+      <div class="row"><div class="t">10:45</div><div class="c">
+        <div class="seg"><span class="mode">🚐</span> <b>→ Sunset Point</b> <span class="dot">·</span> <span class="num">~1.5 km</span> <span class="dot">·</span> <span class="num">5 min</span></div>
+        <div class="act">Sunset Point</div>
+        <div class="desc">10 min — if clear.</div>
+      </div></div>
+      <div class="row"><div class="t">11:15</div><div class="c">
+        <div class="seg"><span class="mode">🚐</span> <b>→ Khandala Lake</b> <span class="dot">·</span> <span class="num">~9 km</span> <span class="dot">·</span> <span class="num">20 min</span></div>
+        <div class="act">Khandala Lake <a class="map" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=18.75644,73.37230">📍 map</a></div>
+        <div class="desc">10 min photo stop.</div>
+      </div></div>
+      <div class="row"><div class="t">11:40</div><div class="c">
+        <div class="seg"><span class="mode">🚐</span> <b>→ Ryewood Park</b> <span class="dot">·</span> <span class="num">~6 km</span> <span class="dot">·</span> <span class="num">15 min</span></div>
+        <div class="act">Ryewood Park <a class="map" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=18.74970,73.40411">📍 map</a></div>
+        <div class="desc">Old trees, botanical garden (15 min) — partly covered, good in drizzle.</div>
+      </div></div>
+      <div class="row"><div class="t">11:58</div><div class="c">
+        <div class="seg"><span class="mode">🚶</span> <b>→ Rajmachi Garden</b> <span class="dot">·</span> adjacent <span class="dot">·</span> <span class="num">3 min</span></div>
+        <div class="act">Rajmachi Garden</div>
+        <div class="desc">Beside Ryewood (10 min).</div>
+      </div></div>
+      <div class="row"><div class="t">12:20</div><div class="c">
+        <div class="seg"><span class="mode">🚐</span> <b>→ Narayani Dham</b> <span class="dot">·</span> <span class="num">~2 km</span> <span class="dot">·</span> <span class="num">8 min</span></div>
+        <div class="act">Narayani Dham Temple</div>
+        <div class="desc">Big, calm, indoor (15 min).</div>
+      </div></div>
+      <div class="row"><div class="t">12:45</div><div class="c">
+        <div class="seg"><span class="mode">🚐</span> <b>→ Lonavala Market</b> <span class="dot">·</span> <span class="num">~1.5 km</span> <span class="dot">·</span> <span class="num">7 min</span></div>
+        <div class="act">Lonavala Market — pure-veg lunch + chikki</div>
+        <div class="desc">Maganlal / National chikki (75 min). <span class="fee">Circuit ≈ 31 km · ~40 min driving</span></div>
+      </div></div>
+
+      <div class="row"><div class="t">14:00</div><div class="c">
+        <div class="act">Cab drops you at Lonavala station (with luggage)</div>
+      </div></div>
+      <div class="row"><div class="t">14:50</div><div class="c">
+        <div class="act">Train to Pune</div>
+        <div class="seg train"><span class="mode">🚆</span> <b>Lonavala → Pune Jn</b> <span class="dot">·</span> <span class="num">64 km</span> <span class="dot">·</span> <span class="num">~1 h 20 m</span></div>
+        <div class="desc">Local 99813 / 01561 (walk-up, ₹60–70). Or express 15:10 / 15:30 (reserved).</div>
+      </div></div>
+      <div class="row"><div class="t">16:10</div><div class="c">
+        <div class="act">Arrive Pune Junction</div>
+        <div class="seg"><span class="mode">🛺</span> <b>Pune Jn → Zen Colive (KP)</b> <span class="dot">·</span> <span class="num">~5 km</span> <span class="dot">·</span> <span class="num">15–20 min</span></div>
+      </div></div>
+      <div class="row"><div class="t">16:45</div><div class="c">
+        <div class="act">Check in at Zen Colive · drop bags · freshen up</div>
+      </div></div>
+      <div class="row"><div class="t">17:00</div><div class="c">
+        <div class="seg"><span class="mode">🚶</span> <b>→ Osho Teerth Park</b> <span class="dot">·</span> walkable from Zen</div>
+        <div class="act">Osho Teerth Park <a class="map" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=Osho+Teerth+Park+Koregaon+Park">📍 map</a></div>
+        <div class="desc">Free Zen garden, open till 6 PM (45 min). Phones silent, no photography.</div>
+      </div></div>
+      <div class="row"><div class="t">19:30</div><div class="c">
+        <div class="act">Dinner in Koregaon Park · rest</div>
+        <div class="desc">German Bakery / Malaka Spice / ABC Farms nearby. Early night — Sunday starts early.</div>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- DAY 3 -->
+  <section class="day" id="d3">
+    <div class="dhead">
+      <span class="no">DAY 3</span>
+      <div><div class="ttl">Sinhagad Fort day-trip</div><div class="date">Sunday, 26 July 2026</div></div>
+      <span class="wx">🏔️</span>
+    </div>
+    <div class="body">
+      <div class="note stop"><span class="nl">Status — check 20 Jul</span><b>Sinhagad is currently CLOSED</b> (landslide near the entrance, 3 Jul — no reopen date yet). Rajgad/Tamhini 2026 status is <b>unconfirmed</b> (the "banned till 30 Sep" order was <b>2025</b>). If Sinhagad hasn't reopened by 20 Jul, swap to a rain-safe alternative (below) or fold this into a Pune-city / Della day.</div>
+      <div class="opt-h">Option 1 · Sinhagad Fort — primary (if reopened) ⚠️</div>
+      <div class="row"><div class="t">06:45</div><div class="c">
+        <div class="act">Breakfast at Zen / KP</div>
+        <div class="desc">Early start — Sinhagad packs out by 10 on a monsoon Sunday.</div>
+      </div></div>
+      <div class="row"><div class="t">07:15</div><div class="c">
+        <div class="seg"><span class="mode">🚐</span> <b>Koregaon Park → Sinhagad base</b> <span class="dot">·</span> <span class="num">~30 km</span> <span class="dot">·</span> <span class="num">~1 h 15 m</span></div>
+        <div class="act">Tempo departs KP</div>
+      </div></div>
+      <div class="row"><div class="t">08:30</div><div class="c">
+        <div class="seg"><span class="mode">🚙</span> <b>Base → fort top</b> <span class="dot">·</span> <span class="num">4 km</span> <span class="dot">·</span> jeep <span class="num">20 min</span> (₹50–150 pp)</div>
+        <div class="act">Reach base → shared jeeps to the top</div>
+        <div class="desc">Or trek 45–60 min for the keen ones.</div>
+      </div></div>
+      <div class="row"><div class="t">09:00</div><div class="c">
+        <div class="act">Sinhagad top <a class="map" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=18.36472,73.75751">📍 map</a></div>
+        <div class="desc">Tanaji memorial, Pune &amp; Kalyan Darwaza, Devtake pond, misty ramparts. Feast on pithla-bhakri, kanda bhaji, bhutta, matka dahi (~3.5 h incl. lunch).</div>
+      </div></div>
+      <div class="row"><div class="t">13:15</div><div class="c">
+        <div class="seg"><span class="mode">🚙🚐</span> <b>Top → Khadakwasla Dam</b> <span class="dot">·</span> <span class="num">~20 km</span> <span class="dot">·</span> <span class="num">40 min</span></div>
+        <div class="act">Jeep down → drive to Khadakwasla</div>
+      </div></div>
+      <div class="row"><div class="t">14:00</div><div class="c">
+        <div class="act">Khadakwasla Dam <span class="desc" style="font-weight:400">(optional)</span> <a class="map" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=18.44184,73.76805">📍 map</a></div>
+        <div class="desc">Lakeside chai / chaat (60 min) — skip for more fort time. It's just a dam, not a highlight.</div>
+      </div></div>
+      <div class="row"><div class="t">15:15</div><div class="c">
+        <div class="seg"><span class="mode">🚐</span> <b>Khadakwasla → Koregaon Park</b> <span class="dot">·</span> <span class="num">~25 km</span> <span class="dot">·</span> <span class="num">~1 h</span></div>
+        <div class="act">Depart for Pune</div>
+      </div></div>
+      <div class="row"><div class="t">16:15</div><div class="c">
+        <div class="act">Back at Zen — rest · relaxed KP dinner</div>
+      </div></div>
+
+      <div class="alt">
+        <div class="opt-h">Option 2 · Rajgad Fort — backup (only if the ban is lifted)</div>
+        <div class="note stop"><span class="nl">2026 status unconfirmed</span>The "closed 22 Jun–30 Sep" order was <b>2025</b> — no 2026 re-issue is confirmed, but heavy rain makes it risky. Confirm directly with the Bhor SDO by 20 Jul. It's a real trek: muddy, slippery, summit often fogged.</div>
+        <div class="row"><div class="t">05:00</div><div class="c">
+          <div class="seg"><span class="mode">🚐</span> <b>Koregaon Park → Pali base village</b> <span class="dot">·</span> <span class="num">~60 km</span> <span class="dot">·</span> <span class="num">~2 h</span></div>
+          <div class="act">Tempo departs KP</div></div></div>
+        <div class="row"><div class="t">07:15</div><div class="c">
+          <div class="seg"><span class="mode">🚶</span> <b>Pali → Rajgad top (gentle "Rajmarg")</b> <span class="dot">·</span> <span class="num">3–4 km</span> <span class="dot">·</span> <span class="num">~2–2.5 h</span></div>
+          <div class="act">Chai + packed breakfast, begin trek</div></div></div>
+        <div class="row"><div class="t">09:45</div><div class="c">
+          <div class="act">Top — Padmavati Machi</div>
+          <div class="desc">Padmavati temple &amp; lake, Balekilla, Suvela &amp; Sanjivani machis; packed lunch at top.</div></div></div>
+        <div class="row"><div class="t">13:00</div><div class="c">
+          <div class="seg"><span class="mode">🚶🚐</span> <b>Descend → tempo → Pune</b> <span class="dot">·</span> ~1.5–2 h down, then ~2 h drive</div>
+          <div class="act">Begin descent → back at Zen ~17:30</div></div></div>
+        <div class="altnote"><b>Other open alternatives</b> (swap the whole day): 🚣 <b>Kolad Kundalika rafting</b> — open &amp; thrilling, but ~110 km / 07:30 report / pre-book · 🎢 <b>Della Adventure Park, Lonavala</b> — ATV, zip-line, group-friendly, ~65 km.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DAY 4 -->
+  <section class="day" id="d4">
+    <div class="dhead">
+      <span class="no">DAY 4</span>
+      <div><div class="ttl">Pune city &amp; departure</div><div class="date">Monday, 27 July 2026</div></div>
+      <span class="wx">🏛️🌙</span>
+    </div>
+    <div class="body">
+      <div class="note stop"><span class="nl">Dropped</span><b>Okayama Garden</b> is closed Mondays. <b>Tirupati Balaji</b> (the real one) is ~50 km south — a half-day trip, impossible on departure day.</div>
+      <div class="row"><div class="t">08:15</div><div class="c"><div class="act">Breakfast at Koregaon Park</div></div></div>
+      <div class="row"><div class="t">09:00</div><div class="c">
+        <div class="act">Checkout Zen · leave bags at reception</div>
+        <div class="seg"><span class="mode">🚐</span> <b>KP → Aga Khan Palace</b> <span class="dot">·</span> <span class="num">~5 km</span> <span class="dot">·</span> <span class="num">15–20 min</span></div>
+      </div></div>
+      <div class="row"><div class="t">09:20</div><div class="c">
+        <div class="act">Aga Khan Palace <a class="map" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=Aga+Khan+Palace+Pune">📍 map</a></div>
+        <div class="desc">Gandhi memorial + gardens (60 min). Closest to base, do first. <span class="fee">₹25 · open 9–5:30</span></div>
+        <div class="seg"><span class="mode">🚐</span> <b>→ Shaniwar Wada</b> <span class="dot">·</span> <span class="num">~7 km</span> <span class="dot">·</span> <span class="num">25 min</span></div>
+      </div></div>
+      <div class="row"><div class="t">10:40</div><div class="c">
+        <div class="act">Shaniwar Wada <a class="map" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=Shaniwar+Wada">📍 map</a></div>
+        <div class="desc">Peshwa-era fort ruins (45 min). Open-air — take a rain break. <span class="fee">₹25 · open 8–6:30</span></div>
+        <div class="seg"><span class="mode">🚶</span> <b>→ Dagdusheth Temple</b> <span class="dot">·</span> <span class="num">~0.7 km</span> <span class="dot">·</span> <span class="num">8 min</span></div>
+      </div></div>
+      <div class="row"><div class="t">11:40</div><div class="c">
+        <div class="act">Dagdusheth Ganpati + Lal Mahal <a class="map" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=Dagdusheth+Halwai+Ganpati+Temple">📍 map</a></div>
+        <div class="desc">Pune's most-loved Ganesh temple (45 min). <span class="fee">Free · open till 11 PM</span></div>
+        <div class="seg"><span class="mode">🚐</span> <b>→ Pataleshwar Cave</b> <span class="dot">·</span> <span class="num">~2 km</span> <span class="dot">·</span> <span class="num">10 min</span></div>
+      </div></div>
+      <div class="row"><div class="t">12:40</div><div class="c">
+        <div class="act">Pataleshwar Cave Temple <a class="map" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=Pataleshwar+Cave+Temple+Pune">📍 map</a></div>
+        <div class="desc">8th-c rock-cut cave — sheltered, good in rain (25 min). <span class="fee">Free · open 8:30–5:30</span></div>
+        <div class="seg"><span class="mode">🚐</span> <b>→ FC Road / Camp</b> <span class="dot">·</span> <span class="num">~2 km</span> <span class="dot">·</span> <span class="num">10 min</span></div>
+      </div></div>
+      <div class="row"><div class="t">13:15</div><div class="c">
+        <div class="act">Lunch — FC Road / Camp + optional shopping (60 min)</div>
+      </div></div>
+      <div class="row"><div class="t">14:30</div><div class="c">
+        <div class="act">Pick ONE (by weather / energy)</div>
+        <div class="desc">
+          ☀️ <a class="map" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=Parvati+Hill+Pune">Parvati Hill</a> — city views, 103 open steps (dry only, ~11 km) ·
+          🌧️ <a class="map" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=Raja+Dinkar+Kelkar+Museum+Pune">Kelkar Museum ★</a> — indoor, rain-proof (₹120) ·
+          🏛️ <a class="map" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=Shinde+Chhatri+Pune">Shinde Chhatri</a> — stone memorial (~₹20)
+        </div>
+      </div></div>
+      <div class="row"><div class="t">15:45</div><div class="c">
+        <div class="act">Return to Zen · collect bags</div>
+        <div class="seg"><span class="mode">🛺</span> <b>KP → Pune Junction</b> <span class="dot">·</span> <span class="num">~5 km</span> <span class="dot">·</span> <span class="num">20 min</span></div>
+      </div></div>
+      <div class="row"><div class="t">17:15</div><div class="c"><div class="act">Reach Pune Junction — buffer before the train</div></div></div>
+      <div class="row"><div class="t">18:35</div><div class="c">
+        <div class="act">Depart Pune — Indrayani Express (22106)</div>
+        <div class="seg train"><span class="mode">🚆</span> <b>Pune → Dadar</b> <span class="dot">·</span> <span class="num">189 km</span> <span class="dot">·</span> <span class="num">~3 h</span></div>
+      </div></div>
+      <div class="row"><div class="t">21:33</div><div class="c">
+        <div class="act">Arrive Dadar Central (DR)</div>
+        <div class="seg"><span class="mode">🚶</span> <b>Dadar Central → Dadar Western</b> <span class="dot">·</span> Tilak foot-over-bridge <span class="dot">·</span> <span class="num">5–10 min</span></div>
+      </div></div>
+      <div class="row"><div class="t">22:00</div><div class="c">
+        <div class="act">Reach Dadar Western · dinner on the platform</div>
+      </div></div>
+      <div class="row"><div class="t">23:50</div><div class="c">
+        <div class="act">Board Ekta Nagar SF (12927) · Sleeper</div>
+        <div class="seg train"><span class="mode">🚆</span> <b>Dadar → Surat</b> <span class="dot">·</span> <span class="num">263 km</span> <span class="dot">·</span> <span class="num">~3 h 51 m</span></div>
+        <div class="note go"><span class="nl">Relax</span>The return is low-risk — the 23:50 <b>originates at Dadar Western</b>, so it won't leave without you. 2 h 17 m buffer.</div>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- DAY 5 -->
+  <section class="day" id="d5">
+    <div class="dhead">
+      <span class="no">DAY 5</span>
+      <div><div class="ttl">Arrive Surat</div><div class="date">Tuesday, 28 July 2026</div></div>
+      <span class="wx">🌅</span>
+    </div>
+    <div class="body">
+      <div class="row"><div class="t">03:41</div><div class="c">
+        <div class="act">Arrive Surat Junction (ST) — trip ends, disperse</div>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- RESPONSIBILITIES -->
+  <section class="day" id="resp">
+    <div class="dhead">
+      <span class="no">TEAM</span>
+      <div><div class="ttl">Responsibilities</div><div class="date">Who owns what · 19 people</div></div>
+      <span class="wx">🧑‍🤝‍🧑</span>
+    </div>
+    <div class="body" style="padding-top:14px">
+      <div class="roles">
+        <div class="role-c lead"><div class="rr">Primary lead</div><div class="pp">Bhautik</div></div>
+        <div class="role-c lead"><div class="rr">Secondary lead</div><div class="pp">Yash</div></div>
+        <div class="role-c"><div class="rr">Food &amp; nasto — buy + keep</div><div class="pp">Ghanshyam · Dixit</div></div>
+        <div class="role-c"><div class="rr">Auto / bike booking</div><div class="pp">Hardik · Teerth · Bhautik · Prince</div></div>
+        <div class="role-c"><div class="rr">Bill collection → HR</div><div class="pp">Rutvik</div></div>
+        <div class="role-c"><div class="rr">Medicine &amp; combine purchases</div><div class="pp">Archit</div></div>
+        <div class="role-c"><div class="rr">Reel ideas (company)</div><div class="pp">Shraddha · Nitasha · Krishna</div></div>
+        <div class="role-c"><div class="rr">Reel-shoot prep · no force</div><div class="pp">Krishna</div></div>
+        <div class="role-c"><div class="rr">Photo &amp; video (company)</div><div class="pp">Prince · Milan</div></div>
+        <div class="role-c"><div class="rr">Train games — Uno / cards</div><div class="pp">Anjali · Nitasha · Krishna</div></div>
+        <div class="role-c"><div class="rr">Speaker</div><div class="pp">Om</div></div>
+        <div class="role-c"><div class="rr">Comms with Ankita</div><div class="pp">Krishna</div></div>
+      </div>
+
+      <div class="subttl">🎫 Ticket &amp; seat confirmation — 4 groups</div>
+      <div class="grp">
+        <div class="g"><b>Group 1</b>Yash</div>
+        <div class="g"><b>Group 2</b>Hardik</div>
+        <div class="g"><b>Group 3</b>Bhautik</div>
+        <div class="g"><b>Group 4</b>Vishal</div>
+      </div>
+      <div class="note go"><span class="nl">Tie-in</span>These <b>4 ticket-group leads double as your 4 door-groups</b> for the 2-minute Dadar boarding — each lead gets their people + bags on the nearest door, then everyone walks through to the reserved coaches. One lead counts heads &amp; boards last.</div>
+    </div>
+  </section>
+
+  <!-- PACKING -->
+  <section class="day" id="pack">
+    <div class="dhead">
+      <span class="no">PACK</span>
+      <div><div class="ttl">What to carry</div><div class="date">Peak monsoon — expect to get wet</div></div>
+      <span class="wx">🎒</span>
+    </div>
+    <div class="body" style="padding-top:14px">
+      <div class="subttl">🌧️ Monsoon must-haves — don't skip</div>
+      <div class="roles">
+        <div class="role-c"><div class="rr">Rain cover</div><div class="pp">Raincoat / poncho + compact umbrella</div></div>
+        <div class="role-c"><div class="rr">Phone protection</div><div class="pp">Waterproof pouch + ziplock bags</div></div>
+        <div class="role-c"><div class="rr">Footwear — grip!</div><div class="pp">Anti-slip floaters · avoid smooth soles</div></div>
+        <div class="role-c"><div class="rr">Bag</div><div class="pp">Backpack rain cover / dry bag</div></div>
+        <div class="role-c"><div class="rr">Spare clothes</div><div class="pp">Quick-dry set · avoid jeans (won't dry)</div></div>
+        <div class="role-c"><div class="rr">Wet clothes</div><div class="pp">Extra garbage / plastic bags</div></div>
+        <div class="role-c"><div class="rr">Dry-off</div><div class="pp">Microfiber quick-dry towel</div></div>
+        <div class="role-c"><div class="rr">Extras</div><div class="pp">Mosquito repellent · small torch</div></div>
+      </div>
+      <div class="note warn"><span class="nl">Why the grip matters</span>Bhushi steps &amp; fort trails are <b>lethally slippery</b> in monsoon — proper anti-slip floaters are a safety item, not comfort. Keep <b>one dry pair of shoes</b> bagged separately.</div>
+
+      <div class="subttl">🧳 Standard personal kit</div>
+      <div class="cols">
+        <div class="chk"><b>Aadhaar card</b> — carry always</div>
+        <div class="chk"><b>Cash ₹1–2k</b> with change (500 + 200 + 100×2 + 50 + 10×5)</div>
+        <div class="chk"><b>Driving licence</b> — whoever has (needed for bike rental)</div>
+        <div class="chk">Toothbrush + tongue cleaner</div>
+        <div class="chk">Towel + handkerchiefs</div>
+        <div class="chk">Suitable clothes + socks</div>
+        <div class="chk">Shoes (+ the dry spare above)</div>
+        <div class="chk">Water bottle</div>
+        <div class="chk">Power bank(s) — as many as you can</div>
+        <div class="chk">Mobile charger + earphones / earbuds</div>
+        <div class="chk">Extension cord (if available)</div>
+        <div class="chk">Facewash · moisturiser · perfume</div>
+        <div class="chk">Cap · waist / money belt · watch</div>
+        <div class="chk">Jacket · shawl / chadar (Pune nights)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OPS -->
+  <section class="day" id="ops">
+    <div class="dhead">
+      <span class="no">OPS</span>
+      <div><div class="ttl">Shared kit · before-trip · rules</div><div class="date">Pooled items &amp; ground rules</div></div>
+      <span class="wx">✅</span>
+    </div>
+    <div class="body" style="padding-top:14px">
+      <div class="subttl">🧴 Combine — shared kit (pool once, carry once)</div>
+      <div class="cols">
+        <div class="chk"><b>Med-kit</b> — anti-cold, fever, ORS, <b>motion-sickness (ghat roads)</b>, antiseptic, band-aids <i>(Archit)</i></div>
+        <div class="chk">Toothpaste · bathing soap / shampoo · moisturiser</div>
+        <div class="chk"><b>Spare disposable ponchos</b> (bulk) + big garbage bags</div>
+        <div class="chk">Playing cards (patta) — from office · <b>Uno</b> <i>(Yash)</i></div>
+        <div class="chk"><b>Speaker</b> <i>(Om)</i> + extension cord</div>
+        <div class="chk">Power strip / multi-charger for the coach</div>
+      </div>
+
+      <div class="subttl">📋 Before the trip</div>
+      <div class="cols">
+        <div class="chk"><b>Download offline maps</b> — Lonavala + Pune <i>(Archit)</i></div>
+        <div class="chk"><b>Save everyone's mobile number</b></div>
+        <div class="chk">Charge all power banks + devices full</div>
+        <div class="chk"><b>Confirm reserved train tickets</b> — all 4 groups + seat numbers</div>
+        <div class="chk">Confirm cab / tempo (GST) + bike rentals (licences)</div>
+        <div class="chk"><b>Buy ponchos + waterproof pouches in advance</b></div>
+        <div class="chk">Bath before boarding at Surat — first proper freshen-up is Zen check-in (Sat afternoon)</div>
+      </div>
+
+      <div class="subttl">📏 Ground rules</div>
+      <div class="cols">
+        <div class="chk"><b>We don't wait for anyone who's late</b> — be on time</div>
+        <div class="chk">Always keep your <b>water bottle</b></div>
+        <div class="chk"><b>Stay together</b> at viewpoints — don't cross barricades</div>
+        <div class="chk"><b>No entering fast water / sitting under falls</b> — banned + deadly</div>
+        <div class="chk">Phone in the <b>waterproof pouch</b> near water</div>
+        <div class="chk">Follow the lead's call on the 4 AM train switch</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="legend">
+    <span>🚆 Train</span><span>🛺 Auto</span><span>🚐 Tempo / cab</span><span>🚙 Jeep</span><span>🚶 Walk</span>
+    <span>★ Highlight</span>
+  </div>
+
+  <footer>
+    Surat ⇄ Lonavala ⇄ Pune · 24–28 July 2026 · Base: Zen Colive, Koregaon Park<br>
+    Times &amp; distances are planning estimates — make the final <b>GO / NO-GO call on 20 July</b> (free-cancellation cutoff) from live train status &amp; monsoon orders, then reconfirm the morning of travel.
+  </footer>
+
+</div>
